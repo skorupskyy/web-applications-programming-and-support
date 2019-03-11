@@ -21,7 +21,7 @@ http.createServer( function(req, res){
     console.log(req.method);
     //console.log(req.headers);
 
-    if(req.url == '/'){
+    if(req.url == '/' || req.url == '/index.html'){
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
         fs.createReadStream("../static/index.html", "utf8").pipe(res);
     }else if(req.url == '/style.css'){
@@ -56,10 +56,6 @@ http.createServer( function(req, res){
 }).listen(3000, '127.0.0.1');
 
 //server.listen(3000, '127.0.0.1');
-
-
-
-
 
 // var net = require('net');
 // var server = net.createServer(function (socket) {
