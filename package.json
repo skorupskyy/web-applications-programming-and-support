@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AlexSkorupsky/web-applications-programming-and-support#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4"
   }
 }
