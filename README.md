@@ -5,6 +5,6 @@ web store in the future
 
 ## technologies
 
-* C#
-* .NET
+* Javascript
+* Node.js
 * HTML/CSS
