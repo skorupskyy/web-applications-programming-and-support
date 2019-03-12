@@ -1,73 +1,30 @@
 var http = require('http');
 var fs = require('fs');
+var express = require('express');
 
 // var index = fs.readFile("../static/index.html", 'utf8');
-
 // var style = fs.readFile("../static/style.css", 'utf8');
-
 // var script = fs.readFile("../static/script.js", 'utf8');
 
-var html = `
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Привіт</h1>
-<p>Тобі відповів САМ сервер...</p>
-</body>
-</html>`
+var app = express();
 
-http.createServer( function(req, res){
-    console.log(req.url);
-    console.log(req.method);
-    //console.log(req.headers);
+app.set('view engine', 'ejs');
 
-    if(req.url == '/' || req.url == '/index.html'){
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-        fs.createReadStream("../static/index.html", "utf8").pipe(res);
-    }else if(req.url == '/style.css'){
-        res.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
-        fs.createReadStream("../static/style.css", "utf8").pipe(res);
-    }else if(req.url == '/script.js'){
-        res.writeHead(200, {'Content-Type': 'text/javascript; charset=utf-8'});
-        fs.createReadStream("../static/script.js", "utf8").pipe(res);
-    }else{
-        res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
-        fs.createReadStream("../static/error404.html", "utf8").pipe(res);
-    }
-    // switch(req.url){
-    //     case '/':
-    //     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-    //     fs.createReadStream("../static/index.html", "utf8").pipe(res);
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + "/index.html"); 
+});
 
-    //     // case '/style.css':
-    //     // res.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
-    //     // fs.createReadStream("../static/style.css", "utf8").pipe(res);
+app.get('/style.css', function(req, res) {
+    res.sendFile(__dirname + "/style.css");
+});
 
-    //     // case '/script.js':
-    //     // res.writeHead(200, {'Content-Type': 'text/javascript; charset=utf-8'});
-    //     // fs.createReadStream("../static/script.js", "utf8").pipe(res);
+app.get('/script.js', function(req, res) {
+    res.sendFile(__dirname + "/script.js");
+});
 
-    //     default:
-    //     res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
-    //     fs.createReadStream("../static/index.html", "utf8").pipe(res);
-    // }
-    
+app.get('/:id', function(req, res) {
+    res.send("id: " + req.params.id);
+});
 
-}).listen(3000, '127.0.0.1');
 
-//server.listen(3000, '127.0.0.1');
-
-// var net = require('net');
-// var server = net.createServer(function (socket) {
-//     console.log('client connected');
-//     socket.on('data', function (data) {
-//         var textChunk = data.toString('utf8');
-//         console.log("receive from client: \n" + textChunk);
-//         socket.write("Hello client, I can hear You!");
-//     });
-//     socket.on('end', function () {
-//         console.log('client disconnected');
-        
-//     });
-// });
-// server.listen(3000, '127.0.0.1');
+app.listen(3000);
