@@ -1,8 +1,16 @@
 body {
     font-family: 'Nunito Sans', sans-serif;
+    background-color: rgba(0,0,0,0.2);
+    /* background: url(https://cdn.pixabay.com/photo/2017/01/08/21/11/wood-1963988__340.jpg) no-repeat center fixed; 
+    background-size: cover; */
+
     transition: background-color .5s;
   }
   
+h3 {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
   .sidenav {
     height: 100%;
     width: 0;
@@ -20,6 +28,7 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
+    font-family: 'Nunito Sans', sans-serif;
     color: #818181;
     display: block;
     transition: 0.3s;
@@ -40,9 +49,19 @@ body {
   #main {
     transition: margin-left .5s;
     padding: 16px;
+    height: 1500px;
+    /* hardcode */
+    background-image: linear-gradient(to bottom right, rgba(0,0,0,0.2), rgba(0,0,0,0.3));
   }
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    height: 110px;
+    width: 100%;
+}
