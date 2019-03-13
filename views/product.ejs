@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <% include blocks/links.ejs %>
+    
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+<div id="main">
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+<i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+<h2>Product number: <%= productId %></h2>
+<h2>Product name: <%= obj.name %></h2>
+<h2>Product count: <%= obj.count %></h2>
+
+<ul>
+    <% obj.models.forEach(function(item){ %>
+        <li><%= item %></li>
+    <% }); %>
+</ul>
+
+<p>Some cool icons:</p>
+<i class="fas fa-dragon" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
+<i class="fa fa-cloud" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
+<i class="fas fa-clock" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
+
+<i class="glyphicon glyphicon-cloud" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
+
+<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">favorite</i>
+<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">attachment</i>
+<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">computer</i>
+<p></p>
+
+<p>Some cool brands icons:</p>
+<i class='fab fa-apple' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-bitcoin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-chrome' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-dev' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-facebook' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-github' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-google' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-hackerrank' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-instagram' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-js-square' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-linkedin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-node' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-python' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-react' style="font-size:70px;color:navwhitey;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-slack' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-telegram-plane' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-wikipedia-w' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-youtube' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
+
+<% include blocks/footer.ejs %>
+</div>
+<script src="/scripts/menuScript.js"></script>
+</body>
+</html>
