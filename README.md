@@ -8,3 +8,4 @@ web store in the future
 * Javascript
 * Node.js
 * HTML/CSS
+* Bootstrap

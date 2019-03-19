@@ -11,12 +11,13 @@
 <div id="main">
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+<img src="/images/xps-15.jpg" height="250px" width="auto" style="float:right">
 <h2>Product number: <%= productId %></h2>
 <h2>Product name: <%= obj.name %></h2>
 <h2>Product count: <%= obj.count %></h2>
 
 <ul>
-    <% obj.models.forEach(function(item){ %>
+    <% obj.pars.forEach(function(item){ %>
         <li><%= item %></li>
     <% }); %>
 </ul>
@@ -47,7 +48,7 @@
 <i class='fab fa-linkedin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-node' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-python' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-react' style="font-size:70px;color:navwhitey;text-shadow:2px 2px 4px #000000;"></i>
+<i class='fab fa-react' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-slack' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-telegram-plane' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-wikipedia-w' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>

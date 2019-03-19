@@ -3,7 +3,7 @@ body {
     background-color: rgba(0,0,0,0.2);
     /* background: url(https://cdn.pixabay.com/photo/2017/01/08/21/11/wood-1963988__340.jpg) no-repeat center fixed; 
     background-size: cover; */
-
+    height: 100%;
     transition: background-color .5s;
   }
   
@@ -49,19 +49,59 @@ h3 {
   #main {
     transition: margin-left .5s;
     padding: 16px;
-    height: 1500px;
+    /* height: 100%; */
     /* hardcode */
-    background-image: linear-gradient(to bottom right, rgba(0,0,0,0.2), rgba(0,0,0,0.3));
+    /* background-image: linear-gradient(to bottom right, rgba(0,0,0,0.2), rgba(0,0,0,0.3)); */
   }
   
-  @media screen and (max-height: 450px) {
+  @media screen and (max-height: 550px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+    .col {width: 100%; margin-top: 0;}
   }
 
-  footer {
+button{
+  background-color: black;
+  color: aliceblue;
+}
+
+button:hover{
+  background-color: darkslategray;
+  color: aliceblue;
+}
+
+footer {
     position: fixed;
     left: 0; bottom: 0;
     height: 110px;
     width: 100%;
+}
+
+.login{
+  background-color: dimgray;
+  color: aliceblue;
+  border: 1px solid rgb(0, 0, 0);
+  text-align:center;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 100px;
+  height: 350px;
+}
+
+.col {
+  width: 80%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+small{
+  color: aliceblue;
 }
