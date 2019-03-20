@@ -49,6 +49,7 @@ h3 {
   #main {
     transition: margin-left .5s;
     padding: 16px;
+    margin-bottom: 150px;
     /* height: 100%; */
     /* hardcode */
     /* background-image: linear-gradient(to bottom right, rgba(0,0,0,0.2), rgba(0,0,0,0.3)); */
@@ -61,20 +62,29 @@ h3 {
   }
 
 button{
-  background-color: black;
-  color: aliceblue;
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 30%;
+  font-size: 18px;
 }
 
 button:hover{
   background-color: darkslategray;
-  color: aliceblue;
+  color: white;
 }
 
 footer {
     position: fixed;
     left: 0; bottom: 0;
-    height: 110px;
     width: 100%;
+background-color: darkgray;
+   color: white;
+   text-align: center;
 }
 
 .login{
@@ -104,4 +114,28 @@ footer {
 
 small{
   color: aliceblue;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
 }

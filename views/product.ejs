@@ -11,16 +11,19 @@
 <div id="main">
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
-<img src="/images/xps-15.jpg" height="250px" width="auto" style="float:right">
-<h2>Product number: <%= productId %></h2>
-<h2>Product name: <%= obj.name %></h2>
-<h2>Product count: <%= obj.count %></h2>
 
-<ul>
-    <% obj.pars.forEach(function(item){ %>
-        <li><%= item %></li>
-    <% }); %>
-</ul>
+<div class="card">
+    <img src="/images/xps-15.jpg" alt="comp" style="width:100%; height: auto;">
+    <h2>Product number: <%= productId %></h2>
+    <h2>Product name: <%= obj.name %></h2>
+    <h2>Product count: <%= obj.count %></h2>
+    <ul>
+        <% obj.pars.forEach(function(item){ %>
+            <li><%= item %></li>
+        <% }); %>
+    </ul>
+    <p><button>Buy</button></p>
+</div>
 
 <p>Some cool icons:</p>
 <i class="fas fa-dragon" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
@@ -54,8 +57,10 @@
 <i class='fab fa-wikipedia-w' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 <i class='fab fa-youtube' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
 
-<% include blocks/footer.ejs %>
+
 </div>
+
+<% include blocks/footer.ejs %>
 <script src="/scripts/menuScript.js"></script>
 </body>
 </html>
