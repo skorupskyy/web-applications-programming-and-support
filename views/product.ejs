@@ -14,14 +14,10 @@
 
 <div class="card">
     <img src="/images/xps-15.jpg" alt="comp" style="width:100%; height: auto;">
-    <h2>Product number: <%= productId %></h2>
+    <h2>Product id: <%= productId %></h2>
     <h2>Product name: <%= obj.name %></h2>
-    <h2>Product count: <%= obj.count %></h2>
-    <ul>
-        <% obj.pars.forEach(function(item){ %>
-            <li><%= item %></li>
-        <% }); %>
-    </ul>
+    <h2>Product processor: <%= obj.processor %></h2>
+    
     <p><button>Buy</button></p>
 </div>
 

@@ -6,6 +6,9 @@ var mongo = require('mongodb');
 
 var app = express();
 
+var mc = mongo.MongoClient;
+var mongourl = "mongodb://localhost:27017/";
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
@@ -43,8 +46,23 @@ app.post('/login', urlencodedParser, function(req, res) {
 });
 
 app.get('/product/:id', function(req, res) {
-    var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
-    res.render('product', {productId: req.params.id, obj: obj}); 
+    // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
+    var obj;
+    var id = req.params.id;
+    mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("webstore");
+        var query = { _id: id };
+        dbo.collection("products").findOne({}, function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            obj = {name: result.name, processor: result.processor};
+            console.log(obj);
+            res.render('product', {productId: id, obj: obj});
+            db.close();
+        });
+    });
+    console.log(id);
 });
 
 app.get('/images/HTML-404-Error-Page.gif', function(req, res) {

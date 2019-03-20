@@ -49,3 +49,11 @@ var volvo = Cars('Volvo');
 // bmw.emit('speed', '250');
 // audi.emit('speed', '240');
 // volvo.emit('speed', '220');
+
+
+// ejs html ul
+// <!-- <ul> -->
+//         <!-- <% obj.pars.forEach(function(item){ %> -->
+//             <!-- <li><%= item %></li> -->
+//         <!-- <% }); %> -->
+// <!-- </ul>  -->
