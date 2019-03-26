@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 //Product Shema
 var productShema = mongoose.Schema({
+    _id:{
+        type: number,
+        required: true
+    },
     model:{
         type: String,
         required: true
