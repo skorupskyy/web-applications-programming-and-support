@@ -3,6 +3,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser')
 var mongo = require('mongodb');
+var path = require('path');
 
 var app = express();
 
@@ -11,6 +12,7 @@ var mongourl = "mongodb://localhost:27017/";
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
 
