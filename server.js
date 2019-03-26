@@ -42,21 +42,36 @@ app.use(express.static('static'));
 // if more folders us this!!!
 
 app.get('/', function(req, res) {
-    
-    res.render("index", {
-        products: products
-    });
+    Product.find({}, function(err, products){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("index", {
+                title: "Home",
+                products: products
+            });
+        }
+    }); 
 });
 
+//Todo: add titles to other pages(prdct, lgn...)
 app.get('/index', function(req, res) {
-    
-    res.render("index", {
-        products: products
-    });
+    Product.find({}, function(err, products){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("index", {
+                title: "Home",
+                products: products
+            });
+        }
+    }); 
 });
 
 app.get('/error404', function(req, res) {
-    res.render("error404");
+    res.render("error404", {
+        title: "Error 404"
+    });
 });
 
 app.get('/login', function(req, res) {

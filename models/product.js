@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 //Product Shema
 var productShema = mongoose.Schema({
     _id:{
-        type: number,
+        type: Number,
         required: true
     },
     model:{
