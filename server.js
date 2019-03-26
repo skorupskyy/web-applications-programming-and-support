@@ -7,15 +7,25 @@ var path = require('path');
 var mongoose = require('mongoose');
 
 //init mongoose
-mongoose.connect('mongodb://localhost:webstore');
+mongoose.connect('mongodb://localhost:27017/webstore');
 var db = mongoose.connection;
+
+//check for db connection and errors
+db.once('open', function(){
+    console.log("DB connected");
+});
+db.on('error', function(err){
+    console.log(err);
+});
 
 //init app
 var app = express();
 
 //init mongo
-var mc = mongo.MongoClient;
-var mongourl = "mongodb://localhost:27017/";
+// var mc = mongo.MongoClient;
+// var mongourl = "mongodb://localhost:27017/";
+
+var Product = require('./models/product');
 
 //init bodyParser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -32,88 +42,14 @@ app.use(express.static('static'));
 // if more folders us this!!!
 
 app.get('/', function(req, res) {
-    var products = [
-        {
-            id: 1,
-            name: 'Dell XPS 15',
-            processor: 'intel core i7',
-            graficscard: 'nvidia 960m',
-            ram: '16',
-            ssd: '512',
-            matrix: 'full hd ips'
-        },
-        {
-            id: 2,
-            name: 'MacBook Pro',
-            processor: 'intel core i7',
-            graficscard: 'nvidia 930m',
-            ram: '16',
-            ssd: '256',
-            matrix: 'full hd ips'
-        },
-        {
-            id: 3,
-            name: 'Asus VivoBook',
-            processor: 'intel core i5',
-            graficscard: 'nvidia 1030m',
-            ram: '8',
-            ssd: '1024 hd',
-            matrix: 'full hd'
-        },
-        {
-            id: 4,
-            name: 'HP Elitebook',
-            processor: 'intel core i5',
-            graficscard: 'nvidia 920m',
-            ram: '8',
-            ssd: '256',
-            matrix: 'full hd'
-        }
-    ];
+    
     res.render("index", {
         products: products
     });
 });
 
 app.get('/index', function(req, res) {
-    var products = [
-        {
-            id: 1,
-            name: 'Dell XPS 15',
-            processor: 'intel core i7',
-            graficscard: 'nvidia 960m',
-            ram: '16',
-            ssd: '512',
-            matrix: 'full hd ips'
-        },
-        {
-            id: 2,
-            name: 'MacBook Pro',
-            processor: 'intel core i7',
-            graficscard: 'nvidia 930m',
-            ram: '16',
-            ssd: '256',
-            matrix: 'full hd ips'
-        },
-        {
-            id: 3,
-            name: 'Asus VivoBook',
-            processor: 'intel core i5',
-            graficscard: 'nvidia 1030m',
-            ram: '8',
-            ssd: '1024 hd',
-            matrix: 'full hd'
-        },
-        {
-            id: 4,
-            name: 'HP Elitebook',
-            processor: 'intel core i5',
-            graficscard: 'nvidia 920m',
-            ram: '8',
-            ssd: '256',
-            matrix: 'full hd'
-        }
-    ];
+    
     res.render("index", {
         products: products
     });
