@@ -17,6 +17,20 @@
     width: 33.33%;
     padding: 10px;
   }
+
+  .fcolumn3 {
+    text-align: right;
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+  }
+
+  .fcolumn1 {
+    text-align: left;
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+  }
   
   /* Clear floats after the columns */
   .frow:after {
