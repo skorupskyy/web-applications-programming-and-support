@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include blocks/links.ejs %>
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+
+<div id="main">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+      
+
+    <div class="form">
+        <p>Welcome</p>
+
+        <p>
+            <b>Email: </b> <%= data.email  %> <br>
+            <b>Password: </b> <%= data.password  %> <br>
+            <b>Checkbox: </b> <%= data.check  %> <br>
+        </p>
+
+    </div>
+  
+    <% include blocks/footer.ejs %>
+</div>
+  
+  <script src="/scripts/menuScript.js"></script>
+     
+  </body>
+  </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include blocks/links.ejs %>
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+
+<div id="main">
+    
+    <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+      
+
+    <div class="form">
+        <h2>Login form</h2>
+
+        <form method="POST" action="/login">
+            <div class="row">
+                <div class="col">
+                      
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small>We'll never share your email with anyone else.</small>
+                        </div>
+                            <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" name="check" class="form-check-input" id="exampleCheck1">
+                            <p> Remember me </p>
+                            <label class="form-check-label" for="exampleCheck1"></label>
+                        </div>
+                        <button>Log in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  
+    
+</div>
+
+<% include blocks/footer.ejs %>
+  
+  <script src="/scripts/menuScript.js"></script>
+     
+  </body>
+  </html>

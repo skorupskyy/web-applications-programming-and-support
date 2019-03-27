@@ -7,4 +7,6 @@ web store in the future
 
 * Javascript
 * Node.js
-* HTML/CSS
+* Npm, node modules(express, nodemon)
+* HTML/CSS/Bootstrap/EJS
+* MongoDB, Mongoose
