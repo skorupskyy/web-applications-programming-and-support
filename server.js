@@ -1,7 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var path = require('path');
 var mongoose = require('mongoose');
@@ -28,7 +28,11 @@ var app = express();
 var Product = require('./models/product');
 
 //init bodyParser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// parse application/json
+app.use(bodyParser.json())
 
 //set view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -78,13 +82,34 @@ app.get('/login', function(req, res) {
     res.render("login");
 });
 
-app.get('/temp', function(req, res) {
-    res.render("temp");
-});
-
 app.post('/login', urlencodedParser, function(req, res) {
     if (!req.body) return res.sendStatus(400);
     res.render("login_success", {data: req.body});
+});
+
+app.get('/product/add', function(req, res) {
+    res.render("add_product", {
+        title: "Add product"
+    });
+});
+
+app.post('/product/add', function(req, res) {
+    let product = new Product();
+    product.model = req.body.model;
+    product.processor = req.body.processor;
+    product.graficscard = req.body.graficscard;
+    product.ram = req.body.ram;
+    product.ssd = req.body.ssd;
+    product.matrix = req.body.matrix;
+
+    product.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            res.redirect('/')
+        }
+    });
 });
 
 app.get('/product/:id', function(req, res) {
@@ -114,6 +139,10 @@ app.get('/images/xps-15.jpg', function(req, res) {
 });
 
 app.get('/css/style.css', function(req, res) {
+    //if (1) then use /static/css/style.css
+});
+
+app.get('/css/footer.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
 

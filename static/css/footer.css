@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  footer {
+    left: 0; bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+    transition: background-color .5s;
+    color: white;
+    text-align: center;
+}
+
+  /* Create four equal columns that floats next to each other */
+  .fcolumn {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .frow:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  }
