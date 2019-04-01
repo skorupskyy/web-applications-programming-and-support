@@ -6,11 +6,11 @@ var mongo = require('mongodb');
 var path = require('path');
 var mongoose = require('mongoose');
 
-//init mongoose
+
 mongoose.connect('mongodb://localhost:27017/webstore');
 var db = mongoose.connection;
 
-//check for db connection and errors
+
 db.once('open', function(){
     console.log("DB connected");
 });
@@ -18,7 +18,7 @@ db.on('error', function(err){
     console.log(err);
 });
 
-//init app
+
 var app = express();
 
 //init mongo
@@ -27,7 +27,7 @@ var app = express();
 
 var Product = require('./models/product');
 
-//init bodyParser
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -112,24 +112,35 @@ app.post('/product/add', function(req, res) {
     });
 });
 
-app.get('/product/:id', function(req, res) {
+app.get('/product/:model', function(req, res) {
     // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
-    var obj;
-    var id = req.params.id;
-    mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("webstore");
-        var query = { _id: id };
-        dbo.collection("products").findOne({}, function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            obj = {name: result.name, processor: result.processor};
-            console.log(obj);
-            res.render('product', {productId: id, obj: obj});
-            db.close();
-        });
+    // var obj;
+    // var id = req.params.id;
+    var query = { model: req.params.model };
+    Product.find(query, function(err, products){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("product", {
+                title: "Product card",
+                products: products
+            });
+        }
     });
-    console.log(id);
+    // mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
+    //     if (err) throw err;
+    //     var dbo = db.db("webstore");
+    //     var query = { _id: id };
+    //     dbo.collection("products").findOne({}, function(err, result) {
+    //         if (err) throw err;
+    //         console.log(result);
+    //         obj = {name: result.name, processor: result.processor};
+    //         console.log(obj);
+    //         res.render('product', {productId: id, obj: obj});
+    //         db.close();
+    //     });
+    // });
+    // console.log(id);
 });
 
 app.get('/images/HTML-404-Error-Page.gif', function(req, res) {
