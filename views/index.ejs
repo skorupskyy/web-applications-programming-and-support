@@ -12,17 +12,31 @@
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
   <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
   <h1>Webstore</h1>
-    
-    <ul>
+  <% include messaging_layout.ejs %>
+    <ul class="list-group">
     <% products.forEach(function(product) { %>
-        <li><%= product.model %> - <%= product.processor %></li>
+        <li class = "list-group-item"><a href="/products/<%= product._id %>"><%= product.model %></a> - <%= product.processor %></li>
     <% }); %>
     </ul>
+
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <% products.forEach(function(product) { %>
+                <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
+                    <img src="/images/xps-15.jpg" alt="comp" style="width:100%; height: auto;">
+                    <h2><a href="/products/<%= product._id %>"><%= product.model %></a></h2>
+                    <p></p>
+                    <p><a href="/products/<%= product._id %>" target="_parent"><button>Buy</button></a></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
 
     <% include blocks/footer.ejs %>
 </div>
 
 <script src="/scripts/menuScript.js"></script>
-   
+<% include blocks/script_links.ejs %>
 </body>
 </html>

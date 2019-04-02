@@ -5,12 +5,14 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var path = require('path');
 var mongoose = require('mongoose');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
 
-//init mongoose
 mongoose.connect('mongodb://localhost:27017/webstore');
 var db = mongoose.connection;
 
-//check for db connection and errors
+
 db.once('open', function(){
     console.log("DB connected");
 });
@@ -18,7 +20,7 @@ db.on('error', function(err){
     console.log(err);
 });
 
-//init app
+
 var app = express();
 
 //init mongo
@@ -27,7 +29,7 @@ var app = express();
 
 var Product = require('./models/product');
 
-//init bodyParser
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -38,6 +40,38 @@ app.use(bodyParser.json())
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
+
+//express sessions
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  }));
+
+//express messages
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+//express validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
 
 // (1)
 // !!! app.use('/static', express.static('static'));
@@ -72,6 +106,10 @@ app.get('/index', function(req, res) {
     }); 
 });
 
+//route files
+var products = require('./routes/products');
+app.use('/products', products);
+
 app.get('/error404', function(req, res) {
     res.render("error404", {
         title: "Error 404"
@@ -87,62 +125,26 @@ app.post('/login', urlencodedParser, function(req, res) {
     res.render("login_success", {data: req.body});
 });
 
-app.get('/product/add', function(req, res) {
-    res.render("add_product", {
-        title: "Add product"
-    });
-});
 
-app.post('/product/add', function(req, res) {
-    let product = new Product();
-    product.model = req.body.model;
-    product.processor = req.body.processor;
-    product.graficscard = req.body.graficscard;
-    product.ram = req.body.ram;
-    product.ssd = req.body.ssd;
-    product.matrix = req.body.matrix;
-
-    product.save(function(err){
-        if(err){
-            console.log(err);
-            return;
-        } else {
-            res.redirect('/')
-        }
-    });
-});
-
-app.get('/product/:id', function(req, res) {
-    // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
-    var obj;
-    var id = req.params.id;
-    mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("webstore");
-        var query = { _id: id };
-        dbo.collection("products").findOne({}, function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            obj = {name: result.name, processor: result.processor};
-            console.log(obj);
-            res.render('product', {productId: id, obj: obj});
-            db.close();
-        });
-    });
-    console.log(id);
-});
-
+//images
+//to do: image get template
 app.get('/images/HTML-404-Error-Page.gif', function(req, res) {
 });
 
 app.get('/images/xps-15.jpg', function(req, res) {
 });
 
+
+//styles
 app.get('/css/style.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
 
 app.get('/css/footer.css', function(req, res) {
+    //if (1) then use /static/css/style.css
+});
+
+app.get('/css/product.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
 
@@ -154,5 +156,12 @@ app.get('/scripts/menuScript.js', function(req, res) {
     // if (1) then...
     //res.sendFile(__dirname + "/menuScript.js");
 });
+
+app.get('/scripts/delete.js', function(req, res) {
+    
+});
+
+app.get('/bower_components/jquery/dist/jquery.js', function(req, res) { });
+app.get('/bower_components/bootstrap/dist/css/bootstrap.js', function(req, res) { });
 
 app.listen(3000);

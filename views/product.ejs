@@ -3,7 +3,9 @@
 <head>
 
     <% include blocks/links.ejs %>
-    
+    <link rel="stylesheet" href="/css/product.css">
+    <title> <%= title %> </title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
@@ -12,51 +14,36 @@
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
 
-<div class="card">
-    <img src="/images/xps-15.jpg" alt="comp" style="width:100%; height: auto;">
-    <h2>Product id: <%= productId %></h2>
-    <h2>Product name: <%= obj.name %></h2>
-    <h2>Product processor: <%= obj.processor %></h2>
-    
-    <p><button>Buy</button></p>
+<div class="container">
+  <div style="text-align:center">
+    <h2><%= product.model %></h2>
+  </div>
+  <div class="row" style="width: 90%">
+    <div class="column">
+      <img src="/images/dell_xps_15.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <h2>ID: <%= product._id %></h2>
+        <h2>Processor: <%= product.processor %></h2>
+        <h2>Graficscard: <%= product.graficscard %></h2>
+        <h2>RAM: <%= product.ram %></h2>
+        <h2>SSD drive: <%= product.ssd %></h2>
+        <h2>Matrix: <%= product.matrix %></h2>
+        <p><button>Buy</button></p>
+        <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+        <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
+    </div>
+  </div>
 </div>
-
-<p>Some cool icons:</p>
-<i class="fas fa-dragon" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-<i class="fa fa-cloud" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-<i class="fas fa-clock" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-
-<i class="glyphicon glyphicon-cloud" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">favorite</i>
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">attachment</i>
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">computer</i>
-<p></p>
-
-<p>Some cool brands icons:</p>
-<i class='fab fa-apple' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-bitcoin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-chrome' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-dev' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-facebook' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-github' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-google' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-hackerrank' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-instagram' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-js-square' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-linkedin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-node' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-python' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-react' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-slack' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-telegram-plane' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-wikipedia-w' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-youtube' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-
 
 </div>
 
 <% include blocks/footer.ejs %>
+
 <script src="/scripts/menuScript.js"></script>
+<% include blocks/script_links.ejs %>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- <script src="/scripts/delete.js"></script> -->
+<script src="/scripts/delete.js"></script>
 </body>
 </html>

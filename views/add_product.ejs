@@ -12,10 +12,16 @@
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
     <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
     
+    <% include messaging_layout.ejs %>
+    <% if(errors) {%>
+        <% errors.forEach(function (error) { %>
+            <div class = "alert alert-danger"> <%= error.msg %> </div>
+        <% }) %>
+    <% } %>
     <div class="form-add">
-        <h2>Add product</h2>
+        <h2><%= title %></h2>
 
-        <form method="POST" action="/product/add">
+        <form method="POST" action="/products/add">
             <div class="row">
                 <div class="col">
                         <div class="form-group">
@@ -54,6 +60,6 @@
 <% include blocks/footer.ejs %>
   
   <script src="/scripts/menuScript.js"></script>
-     
+  <% include blocks/script_links.ejs %>
   </body>
   </html>

@@ -78,7 +78,9 @@ button:hover{
   color: white;
 }
 
-
+.delete{
+  background-color: rgb(150, 0, 0);
+}
 
 .form{
   background-color: dimgray;
@@ -99,7 +101,7 @@ button:hover{
   width: 40%;
   margin-left: 30%;
   margin-top: 100px;
-  height: 600px;
+  height: 620px;
 }
 
 .col {
@@ -122,7 +124,7 @@ small{
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  max-width: 600px;
   margin: auto;
   text-align: center;
   font-family: arial;
