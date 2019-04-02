@@ -12,7 +12,7 @@
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
   <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
   <h1>Webstore</h1>
-    
+  <% include messaging_layout.ejs %>
     <ul class="list-group">
     <% products.forEach(function(product) { %>
         <li class = "list-group-item"><a href="/product/<%= product._id %>"><%= product.model %></a> - <%= product.processor %></li>

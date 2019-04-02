@@ -5,7 +5,9 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var path = require('path');
 var mongoose = require('mongoose');
-
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
 
 mongoose.connect('mongodb://localhost:27017/webstore');
 var db = mongoose.connection;
@@ -38,6 +40,38 @@ app.use(bodyParser.json())
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
+
+//express sessions
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  }));
+
+//express messages
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+//express validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
 
 // (1)
 // !!! app.use('/static', express.static('static'));
@@ -88,28 +122,48 @@ app.post('/login', urlencodedParser, function(req, res) {
 });
 
 app.get('/product/add', function(req, res) {
+    var errors = req.validationErrors();
+
     res.render("add_product", {
-        title: "Add product"
+        title: "Add product",
+        errors: errors
     });
 });
 
 app.post('/product/add', function(req, res) {
-    let product = new Product();
-    product.model = req.body.model;
-    product.processor = req.body.processor;
-    product.graficscard = req.body.graficscard;
-    product.ram = req.body.ram;
-    product.ssd = req.body.ssd;
-    product.matrix = req.body.matrix;
+    req.checkBody('model', 'model is required').notEmpty();
+    req.checkBody('processor', 'processor is required').notEmpty();
+    req.checkBody('graficscard', 'graficscard is required').notEmpty();
+    req.checkBody('ram', 'ram is required').notEmpty();
+    req.checkBody('ssd', 'ssd is required').notEmpty();
+    req.checkBody('matrix', 'matrix is required').notEmpty();
 
-    product.save(function(err){
-        if(err){
-            console.log(err);
-            return;
-        } else {
-            res.redirect('/')
-        }
-    });
+    var errors = req.validationErrors();
+
+    if(errors){
+        res.render('add_product', {
+            title: "Add product",
+            errors: errors
+        });
+    } else {
+        let product = new Product();
+        product.model = req.body.model;
+        product.processor = req.body.processor;
+        product.graficscard = req.body.graficscard;
+        product.ram = req.body.ram;
+        product.ssd = req.body.ssd;
+        product.matrix = req.body.matrix;
+
+        product.save(function(err){
+            if(err){
+                console.log(err);
+                return;
+            } else {
+                req.flash('success', 'Product added');
+                res.redirect('/');
+            }
+        });
+    }
 });
 
 app.get('/product/:id', function(req, res){
@@ -154,7 +208,8 @@ app.post('/product/edit/:id', function(req, res) {
             console.log(err);
             return;
         } else {
-            res.redirect('/')
+            req.flash('success', 'Product updated');
+            res.redirect('/');
         }
     });
 });
@@ -162,7 +217,7 @@ app.post('/product/edit/:id', function(req, res) {
 app.delete('/product/:id', function(req, res){
     var query = { _id: req.params.id};
 
-    console.log(req.params.id);
+    //console.log(req.params.id);
     Product.remove(query, function(err){
         if(err){
             console.log(err);
