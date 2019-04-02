@@ -112,6 +112,19 @@ app.post('/product/add', function(req, res) {
     });
 });
 
+app.get('/product/:id', function(req, res){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("product", {
+                title: "Product card",
+                product: product
+            });
+        }
+    });
+});
+
 app.get('/product/:model', function(req, res) {
     // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
     // var obj;
@@ -143,17 +156,26 @@ app.get('/product/:model', function(req, res) {
     // console.log(id);
 });
 
+
+//images
+//to do: image get template
 app.get('/images/HTML-404-Error-Page.gif', function(req, res) {
 });
 
 app.get('/images/xps-15.jpg', function(req, res) {
 });
 
+
+//styles
 app.get('/css/style.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
 
 app.get('/css/footer.css', function(req, res) {
+    //if (1) then use /static/css/style.css
+});
+
+app.get('/css/product.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
 
