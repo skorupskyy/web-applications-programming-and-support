@@ -5,6 +5,7 @@
     <% include blocks/links.ejs %>
     <link rel="stylesheet" href="/css/product.css">
     <title> <%= title %> </title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
@@ -22,14 +23,15 @@
       <img src="/images/dell_xps_15.jpg" style="width:100%">
     </div>
     <div class="column">
-    <h2>Processor: <%= product.processor %></h2>
-    <h2>Graficscard: <%= product.graficscard %></h2>
-    <h2>RAM: <%= product.ram %></h2>
-    <h2>SSD drive: <%= product.ssd %></h2>
-    <h2>Matrix: <%= product.matrix %></h2>
-    <p><button>Buy</button></p>
-    <p><a href="/product/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
-    <p><a href="#" data-id="<%= product._id %>"><button class = "delete">Delete</button></a></p>
+        <h2>ID: <%= product._id %></h2>
+        <h2>Processor: <%= product.processor %></h2>
+        <h2>Graficscard: <%= product.graficscard %></h2>
+        <h2>RAM: <%= product.ram %></h2>
+        <h2>SSD drive: <%= product.ssd %></h2>
+        <h2>Matrix: <%= product.matrix %></h2>
+        <p><button>Buy</button></p>
+        <p><a href="/product/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+        <a class = "delete-product" href="#" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
     </div>
   </div>
 </div>
@@ -37,9 +39,11 @@
 </div>
 
 <% include blocks/footer.ejs %>
+
 <script src="/scripts/menuScript.js"></script>
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/bootstrap/dist/css/bootstrap.js"></script>
+<% include blocks/script_links.ejs %>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- <script src="/scripts/delete.js"></script> -->
 <script src="/scripts/delete.js"></script>
 </body>
 </html>
