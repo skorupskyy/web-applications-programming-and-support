@@ -106,6 +106,10 @@ app.get('/index', function(req, res) {
     }); 
 });
 
+//route files
+var products = require('./routes/products');
+app.use('/products', products);
+
 app.get('/error404', function(req, res) {
     res.render("error404", {
         title: "Error 404"
@@ -119,125 +123,6 @@ app.get('/login', function(req, res) {
 app.post('/login', urlencodedParser, function(req, res) {
     if (!req.body) return res.sendStatus(400);
     res.render("login_success", {data: req.body});
-});
-
-app.get('/product/add', function(req, res) {
-    var errors = req.validationErrors();
-
-    res.render("add_product", {
-        title: "Add product",
-        errors: errors
-    });
-});
-
-app.post('/product/add', function(req, res) {
-    req.checkBody('model', 'model is required').notEmpty();
-    req.checkBody('processor', 'processor is required').notEmpty();
-    req.checkBody('graficscard', 'graficscard is required').notEmpty();
-    req.checkBody('ram', 'ram is required').notEmpty();
-    req.checkBody('ssd', 'ssd is required').notEmpty();
-    req.checkBody('matrix', 'matrix is required').notEmpty();
-
-    var errors = req.validationErrors();
-
-    if(errors){
-        res.render('add_product', {
-            title: "Add product",
-            errors: errors
-        });
-    } else {
-        let product = new Product();
-        product.model = req.body.model;
-        product.processor = req.body.processor;
-        product.graficscard = req.body.graficscard;
-        product.ram = req.body.ram;
-        product.ssd = req.body.ssd;
-        product.matrix = req.body.matrix;
-
-        product.save(function(err){
-            if(err){
-                console.log(err);
-                return;
-            } else {
-                req.flash('success', 'Product added');
-                res.redirect('/');
-            }
-        });
-    }
-});
-
-app.get('/product/:id', function(req, res){
-    Product.findById(req.params.id, function(err, product){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("product", {
-                title: "Product card",
-                product: product
-            });
-        }
-    });
-});
-
-app.get('/product/edit/:id', function(req, res){
-    Product.findById(req.params.id, function(err, product){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("edit_product", {
-                title: "Edit product",
-                product: product
-            });
-        }
-    });
-});
-
-app.post('/product/edit/:id', function(req, res) {
-    let product = {};
-    product.model = req.body.model;
-    product.processor = req.body.processor;
-    product.graficscard = req.body.graficscard;
-    product.ram = req.body.ram;
-    product.ssd = req.body.ssd;
-    product.matrix = req.body.matrix;
-
-    var query = { _id: req.params.id};
-
-    Product.updateOne(query, product, function(err){
-        if(err){
-            console.log(err);
-            return;
-        } else {
-            req.flash('success', 'Product updated');
-            res.redirect('/');
-        }
-    });
-});
-
-app.delete('/product/:id', function(req, res){
-    var query = { _id: req.params.id};
-
-    //console.log(req.params.id);
-    Product.remove(query, function(err){
-        if(err){
-            console.log(err);
-        } 
-        res.send('Success');
-    });
-});
-
-app.get('/product/:model', function(req, res) {
-    var query = { model: req.params.model };
-    Product.find(query, function(err, products){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("product", {
-                title: "Product card",
-                products: products
-            });
-        }
-    });
 });
 
 

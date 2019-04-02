@@ -7,7 +7,7 @@ $(document).ready(function(){
         //console.log(id);
         $.ajax({
             type:'DELETE',
-            url: '/product/'+id,
+            url: '/products/'+id,
             success: function(response){
             alert('Deleting product ' + id);
             window.location.href='/';
