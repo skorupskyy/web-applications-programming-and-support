@@ -13,15 +13,13 @@
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
 
-
 <div class="container">
   <div style="text-align:center">
     <h2><%= product.model %></h2>
-    <p>Swing by for a cup of coffee, or leave us a message:</p>
   </div>
   <div class="row" style="width: 90%">
     <div class="column">
-      <img src="https://i1.rozetka.ua/goods/10842496/dell_xps_15_9570_970ui916s3gf15_wsl_images_10842496725.jpg" style="width:100%">
+      <img src="/images/dell_xps_15.jpg" style="width:100%">
     </div>
     <div class="column">
     <h2>Processor: <%= product.processor %></h2>
@@ -30,42 +28,11 @@
     <h2>SSD drive: <%= product.ssd %></h2>
     <h2>Matrix: <%= product.matrix %></h2>
     <p><button>Buy</button></p>
+    <p><a href="/product/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+    <p><a href="#" data-id="<%= product._id %>"><button class = "delete">Delete</button></a></p>
     </div>
   </div>
 </div>
-
-<p>Some cool icons:</p>
-<i class="fas fa-dragon" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-<i class="fa fa-cloud" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-<i class="fas fa-clock" style="font-size:60px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-
-<i class="glyphicon glyphicon-cloud" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;"></i>
-
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">favorite</i>
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">attachment</i>
-<i class="material-icons" style="font-size:70px;color:darkcyan;text-shadow:2px 2px 4px #000000;">computer</i>
-<p></p>
-
-<p>Some cool brands icons:</p>
-<i class='fab fa-apple' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-bitcoin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-chrome' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-dev' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-facebook' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-github' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-google' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-hackerrank' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-instagram' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-js-square' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-linkedin' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-node' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-python' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-react' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-slack' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-telegram-plane' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-wikipedia-w' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-<i class='fab fa-youtube' style="font-size:70px;color:white;text-shadow:2px 2px 4px #000000;"></i>
-
 
 </div>
 
@@ -73,5 +40,6 @@
 <script src="/scripts/menuScript.js"></script>
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="/bower_components/bootstrap/dist/css/bootstrap.js"></script>
+<script src="/scripts/delete.js"></script>
 </body>
 </html>

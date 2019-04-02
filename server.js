@@ -125,10 +125,41 @@ app.get('/product/:id', function(req, res){
     });
 });
 
+app.get('/product/edit/:id', function(req, res){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("edit_product", {
+                title: "Edit product",
+                product: product
+            });
+        }
+    });
+});
+
+app.post('/product/edit/:id', function(req, res) {
+    let product = {};
+    product.model = req.body.model;
+    product.processor = req.body.processor;
+    product.graficscard = req.body.graficscard;
+    product.ram = req.body.ram;
+    product.ssd = req.body.ssd;
+    product.matrix = req.body.matrix;
+
+    var query = { _id: req.params.id};
+
+    Product.updateOne(query, product, function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            res.redirect('/')
+        }
+    });
+});
+
 app.get('/product/:model', function(req, res) {
-    // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
-    // var obj;
-    // var id = req.params.id;
     var query = { model: req.params.model };
     Product.find(query, function(err, products){
         if(err){
@@ -140,20 +171,6 @@ app.get('/product/:model', function(req, res) {
             });
         }
     });
-    // mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
-    //     if (err) throw err;
-    //     var dbo = db.db("webstore");
-    //     var query = { _id: id };
-    //     dbo.collection("products").findOne({}, function(err, result) {
-    //         if (err) throw err;
-    //         console.log(result);
-    //         obj = {name: result.name, processor: result.processor};
-    //         console.log(obj);
-    //         res.render('product', {productId: id, obj: obj});
-    //         db.close();
-    //     });
-    // });
-    // console.log(id);
 });
 
 
