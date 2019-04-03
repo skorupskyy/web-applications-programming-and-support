@@ -3,6 +3,10 @@
     <a href="/">DragonStore</a>
     <a href="/error404">Error page</a>
     <a href="/products/add">Add product</a>
-    <a href="/users/login">Log in</a>
-    <a href="/users/register">Sign up</a>
+    <% if(user) {%>
+        <a href="/users/logout"> Log out</a>
+    <%} else {%>
+        <a href="/users/register"> Sign Up</a>
+        <a href="/users/login"> Login</a>
+    <%}%>
 </div>
