@@ -108,23 +108,16 @@ app.get('/index', function(req, res) {
 
 //route files
 var products = require('./routes/products');
+var users = require('./routes/users');
+app.use('/users', users);
 app.use('/products', products);
+
 
 app.get('/error404', function(req, res) {
     res.render("error404", {
         title: "Error 404"
     });
 });
-
-app.get('/login', function(req, res) {
-    res.render("login");
-});
-
-app.post('/login', urlencodedParser, function(req, res) {
-    if (!req.body) return res.sendStatus(400);
-    res.render("login_success", {data: req.body});
-});
-
 
 //images
 //to do: image get template

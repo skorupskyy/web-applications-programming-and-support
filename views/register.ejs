@@ -18,31 +18,38 @@
             <div class = "alert alert-danger"> <%= error.msg %> </div>
         <% }) %>
     <% } %>
-    <div class="form-add" style="height:450px">
+    <div class="form-add">
     <p></p>
-    <br>
         <i class='fab fa-facebook' style="font-size:40px;color:black;"></i>
         <i class='fab fa-instagram' style="font-size:40px;color:black;"></i>
         <i class='fab fa-linkedin' style="font-size:40px;color:black;"></i>
         
-        <h2>Please log in:</h2>
+        <h2>Registration form:</h2>
         <form method="POST" action="/users/register">
             <div class="row">
                 <div class="col">
-                    
                         <div class="form-group">
+                            <label for="Name">Name:</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="name">
+                        </div>
+                            <div class="form-group">
                             <label for="Email">Email:</label>
                             <input type="text" name="email" class="form-control" id="email" placeholder="email">
-                            <small>We'll never share your email with anyone else.</small>
                         </div>
-                       
                         <div class="form-group">
+                            <label for="Username">Username:</label>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="username">
+                        </div>
+                            <div class="form-group">
                             <label for="Password">Password:</label>
                             <input type="password" name="password" class="form-control" id="password" placeholder="password">
-                            <small>Forgot password?</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="SSD">Confirm password:</label>
+                            <input type="password" name="password2" class="form-control" id="password" placeholder="password">
                         </div>
                         <br>
-                        <button>Sign in</button>
+                        <button>Register</button>
                 </div>
             </div>
         </form>

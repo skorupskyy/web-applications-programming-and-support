@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//model
+//product model
 var Product = require('../models/product');
 
 
