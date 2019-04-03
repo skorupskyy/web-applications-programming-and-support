@@ -30,15 +30,19 @@
         <h2>SSD drive: <%= product.ssd %></h2>
         <h2>Matrix: <%= product.matrix %></h2>
         <p><button>Buy</button></p>
-        <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
-        <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
+        <% if(user) {%>
+          <% if(user.isAdmin == true) {%>
+            <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+            <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
+          <%}%>
+        <%}%>
     </div>
   </div>
 </div>
-
+<% include blocks/footer.ejs %>
 </div>
 
-<% include blocks/footer.ejs %>
+
 
 <script src="/scripts/menuScript.js"></script>
 <% include blocks/script_links.ejs %>

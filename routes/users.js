@@ -22,6 +22,7 @@ router.post('/register', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
+    var isAdmin = false;
 
     req.checkBody('name', 'name is required').notEmpty();
     req.checkBody('email', 'email is required').notEmpty();
@@ -42,7 +43,8 @@ router.post('/register', function(req, res) {
             name: name,
             email: email,
             username: username,
-            password: password
+            password: password,
+            isAdmin: isAdmin
         });
 
         bcrypt.genSalt(10, function(err, salt){

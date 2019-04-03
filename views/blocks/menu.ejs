@@ -2,7 +2,11 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/">DragonStore</a>
     <a href="/error404">Error page</a>
-    <a href="/products/add">Add product</a>
+    <% if(user) {%>
+        <% if(user.isAdmin) {%>
+            <a href="/products/add">Add product</a>
+        <%}%>
+    <%}%>
     <% if(user) {%>
         <a href="/users/logout"> Log out</a>
     <%} else {%>
