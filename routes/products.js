@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-//model
+//product model
 var Product = require('../models/product');
+var User = require('../models/user');
 
 
-
-router.get('/add', function(req, res) {
+router.get('/add', ensureAuthenticated, function(req, res) {
     var errors = req.validationErrors();
 
     res.render("add_product", {
@@ -15,7 +15,7 @@ router.get('/add', function(req, res) {
     });
 });
 
-router.post('/add', function(req, res) {
+router.post('/add', ensureAuthenticated, function(req, res) {
     req.checkBody('model', 'model is required').notEmpty();
     req.checkBody('processor', 'processor is required').notEmpty();
     req.checkBody('graficscard', 'graficscard is required').notEmpty();
@@ -51,20 +51,26 @@ router.post('/add', function(req, res) {
     }
 });
 
-router.get('/edit/:id', function(req, res){
+router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Product.findById(req.params.id, function(err, product){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("edit_product", {
-                title: "Edit product",
-                product: product
-            });
-        }
+        User.findById(req.user._id, function(err, user){
+            if(!user.isAdmin){
+                req.flash('danger', 'You do not have access to this page');
+                res.redirect('/');
+            }
+            if(err){
+                console.log(err);
+            } else {
+                res.render("edit_product", {
+                    title: "Edit product",
+                    product: product
+                });
+            }
+        });
     });
 });
 
-router.post('/edit/:id', function(req, res) {
+router.post('/edit/:id', ensureAuthenticated, function(req, res) {
     let product = {};
     product.model = req.body.model;
     product.processor = req.body.processor;
@@ -86,7 +92,7 @@ router.post('/edit/:id', function(req, res) {
     });
 });
 
-router.delete('/:id', function(req, res){
+router.delete('/:id', ensureAuthenticated, function(req, res){
     var query = { _id: req.params.id};
 
     //console.log(req.params.id);
@@ -98,7 +104,7 @@ router.delete('/:id', function(req, res){
     });
 });
 
-router.get('/:id', function(req, res){
+router.get('/:id', ensureAuthenticated, function(req, res){
     Product.findById(req.params.id, function(err, product){
         if(err){
             console.log(err);
@@ -110,6 +116,16 @@ router.get('/:id', function(req, res){
         }
     });
 });
+
+// Access Control
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+      return next();
+    } else {
+      req.flash('danger', 'Please login');
+      res.redirect('/users/login');
+    }
+  }
 
 //                             |
 //to do: something with that  \|/

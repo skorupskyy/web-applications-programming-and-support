@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AlexSkorupsky/web-applications-programming-and-support#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bower": "^1.8.8",
     "connect-flash": "^0.1.1",
@@ -33,6 +34,8 @@
     "express-validator": "^5.3.1",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.20",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
