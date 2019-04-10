@@ -23,16 +23,25 @@
       <img src="/images/dell_xps_15.jpg" style="width:100%">
     </div>
     <div class="column">
-        <h2>ID: <%= product._id %></h2>
+        <% if(!user); else {%>
+            <% if(user.isAdmin) {%>
+              <h2>ID: <%= product._id %></h2>
+            <%}%>
+        <%}%>
         <h2>Processor: <%= product.processor %></h2>
         <h2>Graficscard: <%= product.graficscard %></h2>
         <h2>RAM: <%= product.ram %></h2>
         <h2>SSD drive: <%= product.ssd %></h2>
         <h2>Matrix: <%= product.matrix %></h2>
+        <h2>Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
+        <% if(product.discount != 0) {%>
+          <h2 style="color: red;">Discount: <%= product.discount %>&#37;</h2>
+        <% } %>
         <p><button>Buy</button></p>
         <% if(user) {%>
           <% if(user.isAdmin == true) {%>
             <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+            <p><a href="/products/add_discount/<%= product._id %>" target="_parent"><button>Add discount</button></a></p>
             <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
           <%}%>
         <%}%>

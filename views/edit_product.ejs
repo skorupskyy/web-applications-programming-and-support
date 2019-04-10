@@ -12,35 +12,47 @@
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
     <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
     
-    <div class="form-add">
+    <div class="form-add" style="height:860px">
         <h2><%= title %></h2>
-
+        
         <form method="POST" action="/products/edit/<%= product._id %>">
             <div class="row">
                 <div class="col">
                         <div class="form-group">
                             <label for="Model">Model:</label>
-                            <input type="model" name="model" class="form-control" id="model" placeholder="model" value=<%= product.model %>>
+                            <input type="model" name="model" class="form-control" id="model" placeholder="model" value="<%=product.model %>">
                         </div>
                             <div class="form-group">
                             <label for="Processor">Processor:</label>
-                            <input type="processor" name="processor" class="form-control" id="processor" placeholder="processor" value=<%= product.processor %>>
+                            <input type="processor" name="processor" class="form-control" id="processor" placeholder="processor" value="<%= product.processor %>">
                         </div>
                         <div class="form-group">
                             <label for="Graficscard">Graficscard:</label>
-                            <input type="graficscard" name="graficscard" class="form-control" id="graficscard" placeholder="graficscard" value=<%= product.graficscard %>>
+                            <input type="graficscard" name="graficscard" class="form-control" id="graficscard" placeholder="graficscard" value="<%= product.graficscard %>">
                         </div>
                             <div class="form-group">
                             <label for="RAM">RAM:</label>
-                            <input type="ram" name="ram" class="form-control" id="ram" placeholder="ram" value=<%= product.ram %>>
+                            <input type="ram" name="ram" class="form-control" id="ram" placeholder="ram" value="<%= product.ram %>">
                         </div>
                         <div class="form-group">
                             <label for="SSD">SSD:</label>
-                            <input type="ssd" name="ssd" class="form-control" id="ssd" placeholder="ssd" value=<%= product.ssd %>>
+                            <input type="ssd" name="ssd" class="form-control" id="ssd" placeholder="ssd" value="<%= product.ssd %>">
                         </div>
                             <div class="form-group">
                             <label for="Matrix">Matrix:</label>
-                            <input type="matrix" name="matrix" class="form-control" id="matrix" placeholder="matrix" value=<%= product.matrix %>>
+                            <input type="matrix" name="matrix" class="form-control" id="matrix" placeholder="matrix" value="<%= product.matrix %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="Pageid">Pageid:</label>
+                            <input type="pageid" name="pageid" class="form-control" id="pageid" placeholder="pageid" value="<%= product.pageid %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="Price">Price:</label>
+                            <input type="price" name="price" class="form-control" id="price" placeholder="price" value="<%= product.price %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="Discount">Discount:</label>
+                            <input type="discount" name="discount" class="form-control" id="discount" placeholder="discount" value="<%= product.discount %>">
                         </div>
                         <button>Confirm</button>
                 </div>
@@ -49,8 +61,6 @@
         </form>
         
     </div>
-  
-    
 </div>
 
 <% include blocks/footer.ejs %>

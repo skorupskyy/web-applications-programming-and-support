@@ -30,6 +30,18 @@ var productShema = mongoose.Schema({
         type: String,
         required: true
     },
+    pageid: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    discount: {
+        type: Number,
+        required: true
+    }
 });
 
 var Product = module.exports = mongoose.model('Product', productShema);
