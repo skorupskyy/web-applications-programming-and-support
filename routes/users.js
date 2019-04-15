@@ -6,7 +6,6 @@ const passport = require('passport');
 //user model
 var User = require('../models/user');
 
-
 router.get('/register', function(req, res){
     var errors = req.validationErrors();
 
