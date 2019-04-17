@@ -10,9 +10,8 @@
 
 <% include blocks/menu.ejs %>
 <div id="main">
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-<i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
-
+<% include blocks/register_menu.ejs %>
+    <% include messaging_layout.ejs %>
 <div class="container">
   <div style="text-align:center">
     <h2><%= product.model %></h2>
@@ -36,7 +35,7 @@
         <% if(product.discount != 0) {%>
           <h2 style="color: red;">Discount: <%= product.discount %>&#37;</h2>
         <% } %>
-        <p><button>Buy</button></p>
+        <p><a href="/products/add_to_cart/<%= product._id %>/<%= product.model %>/<%= product.price - (product.discount * product.price/100) %>" target="_parent"><button>Buy</button></a></p>
         <% if(user) {%>
           <% if(user.isAdmin == true) {%>
             <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
