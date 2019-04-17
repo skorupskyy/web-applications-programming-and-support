@@ -3,16 +3,17 @@
 <head>
     <% include blocks/links.ejs %>
     <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/carousel.css">
     <title> <%= title %> </title>
-
 </head>
 <body>
 
 <% include blocks/menu.ejs %>
 
 <div id="main">
-<% include blocks/register_menu.ejs %>
-<% include messaging_layout.ejs %>
+    <% include blocks/register_menu.ejs %>
+    <% include messaging_layout.ejs %>
+    
     <h1>All products:</h1>
     
     <label class="ccontainer">List view
@@ -23,7 +24,15 @@
     <div id="listview" style="display:none">
         <ul class="list-group">
             <% products.forEach(function(product) { %>
-                <li class = "list-group-item"><a href="/products/<%= product._id %>"><%= product.model %></a> - <%= product.processor %></li>
+                <% let cc = "black";%>
+                <% let disc = "";%>
+                <% if(product.discount != 0) {%>
+                    <% cc = "red"; %>
+                    <% disc = "discount!!!"; %>
+                <% } %>
+                <li class = "list-group-item" style="color: <%= cc %>;">
+                    <a href="/products/<%= product._id %>"><%= product.model %></a> - <%= product.price - (product.discount * product.price/100) %>&#36;   <%= disc %>
+                </li>
             <% }); %>
         </ul>
     </div>
@@ -33,13 +42,16 @@
             <div class="row">
                 <% products.forEach(function(product) { %>
                     <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
-                        <% var cc = "black" %>
-                        <% var bc = "white" %>
+                        <% let cc = "black";%>
+                        <% let bc = "white";%>
                         <% if(product.discount != 0) {%>
-                            <% cc = "red" %>
-                            <% var bc = "powderblue" %>
+                            <% cc = "red"; %>
+                            <% bc = "powderblue"; %>
                         <% } %>
-                        <img src="/images/xps-15.jpg" alt="comp" style="width:100%; height: auto;">
+                        <div align="center">
+                            <img src="/images/<%= product.model %>.jpg" alt="<%= product.model %>" style="width:240px; height: 150px;">
+                        </div>
+                        
                         <h2><a href="/products/<%= product._id %>"><%= product.model %></a></h2>
                         <h2 style="color: <%= cc %>; background-color:<%= bc %>;">Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
                         <p></p>

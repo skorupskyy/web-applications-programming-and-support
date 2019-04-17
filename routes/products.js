@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const passport = require('passport');
 
-//product model
+//models
 var Product = require('../models/product');
 var User = require('../models/user');
-
+var CartProduct = require('../models/cartProduct');
+var ShoppingCart = require('../models/shoppingCart');
 
 router.get('/add', ensureAuthenticated, function(req, res) {
     var errors = req.validationErrors();
@@ -55,6 +57,42 @@ router.post('/add', ensureAuthenticated, function(req, res) {
         });
     }
 });
+
+
+router.get('/add_to_cart/:id/:model/:price', ensureAuthenticated, function(req, res){
+    // var strid = req.user._id.toString();
+    // var query = { userId: s};
+    // console.log(req.params.model);
+    // console.log(req.params.price);
+    let cp = new CartProduct();
+    cp.userId = req.user._id.toString();
+    cp.userName = req.user.name.toString();
+    cp.productId = req.params.id;
+    cp.productName = req.params.model;
+    cp.productPrice = req.params.price;
+    cp.count = 1;
+    //to do: make count prop a type of Number
+    cp.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            req.flash('success', 'Product added to shopping cart');
+            res.redirect('/users/shopping_cart');
+        }
+    });
+    // CartProduct.findOne(query, function(err, cp){ ....
+
+        // if(cp._id == '5cb654e21e9bdd3a4c33a9ea'){
+        //     //add new cart_product
+        //     //let cp = new CartProduct();
+        //     console.log('sc')
+        // } else {
+        //     //create new sc
+        //     console.log("shopping cart not found")
+        // }
+});
+
 
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Product.findById(req.params.id, function(err, product){

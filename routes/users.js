@@ -3,9 +3,10 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-//user model
+// models
 var User = require('../models/user');
-
+var Product = require('../models/product');
+var CartProduct = require('../models/cartProduct');
 
 router.get('/register', function(req, res){
     var errors = req.validationErrors();
@@ -89,5 +90,32 @@ router.get('/logout', function(req, res){
     req.flash('success', 'You are logged out');
     res.redirect('/users/login');
   });
+
+router.get('/shopping_cart', ensureAuthenticated, function(req, res) {
+    var query = { userId: req.user._id };
+    CartProduct.find(query, function(err, cartprods){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("shopping_cart", {
+                title: "Shopping cart",
+                products: cartprods,
+                username: req.user.name
+            });
+        }
+    });
+});
+
+
+// Access Control
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+      return next();
+    } else {
+      req.flash('danger', 'Please login');
+      res.redirect('/users/login');
+    }
+  }
+
 
 module.exports = router;
